@@ -1,6 +1,5 @@
-package argon2;
+package de.slevermann.pwhash.argon2;
 
-import de.slevermann.pwhash.argon2.Argon2Strategy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
