@@ -1,4 +1,4 @@
-package de.slevermann.pwhash.argon2;
+package de.slevermann.pwhash;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

@@ -1,8 +1,7 @@
-package de.slevermann.pwhash.argon2;
+package de.slevermann.pwhash;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-import de.slevermann.pwhash.HashStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
