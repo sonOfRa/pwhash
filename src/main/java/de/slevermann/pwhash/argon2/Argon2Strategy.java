@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A strategy implementation using argon2 for password hashing
+ * A strategy implementation using argon2 for password hashing.
  * <p>
+ * By default, argon2id is used, with reasonable parameters taken from the defaults
+ * that PHP uses for its password_hash() API. All values can be adjusted.
  */
 public class Argon2Strategy implements HashStrategy {
 
@@ -54,12 +56,41 @@ public class Argon2Strategy implements HashStrategy {
 
     private Argon2 argon2;
 
+    /**
+     * Construct an instance with all defaults
+     */
     public Argon2Strategy() {
-        memoryCost = DEFAULT_MEMORY_COST;
-        threads = DEFAULT_THREADS;
-        timeCost = DEFAULT_TIME_COST;
-        type = DEFAULT_TYPE;
-        argon2 = Argon2Factory.create(type, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
+        this(DEFAULT_TYPE, DEFAULT_MEMORY_COST, DEFAULT_THREADS, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
+    }
+
+    /**
+     * Construct an instance with default parameters, except the argon2 type
+     *
+     * @param type the type of argon2 (i, id, d) to use
+     */
+    public Argon2Strategy(Argon2Factory.Argon2Types type) {
+        this(type, DEFAULT_MEMORY_COST, DEFAULT_THREADS, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
+    }
+
+    /**
+     * Construct a fully customized hashing instance.
+     * <p>
+     * For all arguments, there are default values present in the class to be used if not all values need to be customized
+     *
+     * @param type       the type of argon2 (i, id, d) to use
+     * @param memoryCost the memory cost in kibibytes
+     * @param threads    the amount of threads to use
+     * @param timeCost   the amount of iterations to use
+     * @param saltLength the length of the salt
+     * @param hashLength the length of the hash
+     */
+    public Argon2Strategy(Argon2Factory.Argon2Types type, int memoryCost, int threads, int timeCost,
+                          int saltLength, int hashLength) {
+        this.type = type;
+        this.memoryCost = memoryCost;
+        this.threads = threads;
+        this.timeCost = timeCost;
+        this.argon2 = Argon2Factory.create(type, saltLength, hashLength);
     }
 
     public String hash(String password) {
