@@ -1,9 +1,5 @@
 package de.slevermann.pwhash;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * HashStrategy interface to unify different hashing strategies. Any options passed to the hashing functions
  * should be implemented as constructor parameters or constants. Constructor parameters are recommended, because it allows
@@ -36,8 +32,10 @@ public interface HashStrategy {
      * This function should be called after verifying a given password. If the password matches, we can then check whether the
      * options and parameters in the stored hash are the same as the options given by the implementation.
      *
-     * @param hash the hash to check
+     * @param password the password. This parameter is needed to verify inside the function whether authentication is successful
+     *                 against the given hash
+     * @param hash     the hash to check
      * @return true if the password needs to be rehashed (options do NOT match), false otherwise
      */
-    boolean needsRehash(String hash);
+    boolean needsRehash(String password, String hash);
 }
