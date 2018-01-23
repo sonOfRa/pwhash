@@ -44,6 +44,9 @@ public class BCryptStrategy implements HashStrategy {
         if (!verify(password, hash)) {
             throw new IllegalArgumentException("Cannot verify hash");
         }
-        return false;
+
+        int workFactor = Integer.parseInt(hash.split("\\$")[2]);
+
+        return workFactor != this.workFactor;
     }
 }
