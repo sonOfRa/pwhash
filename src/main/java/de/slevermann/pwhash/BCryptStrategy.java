@@ -42,7 +42,7 @@ public class BCryptStrategy implements HashStrategy {
          * If the password fails to verify against the given hash, it might not be a valid hash. Abort here.
          */
         if (!verify(password, hash)) {
-            throw new IllegalArgumentException("Cannot verify hash");
+            return false;
         }
 
         int workFactor = Integer.parseInt(hash.split("\\$")[2]);

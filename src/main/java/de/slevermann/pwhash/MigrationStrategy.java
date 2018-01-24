@@ -45,7 +45,7 @@ public class MigrationStrategy<F extends HashStrategy, T extends HashStrategy> i
          * we don't want to rehash
          */
         if (!newStrategy.verify(password, hash)) {
-            throw new IllegalArgumentException("Cannot verify hash");
+            return false;
         }
 
         /*

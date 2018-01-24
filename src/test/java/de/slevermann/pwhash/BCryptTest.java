@@ -38,12 +38,13 @@ public class BCryptTest {
                 "Default hash should not require a rehash");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public static void rehashException() {
+    @Test
+    public static void rehashWrongPassword() {
         String password = "The Magic Words are Squeamish Ossifrage";
         String hash = defaultStrategy.hash(password);
 
-        defaultStrategy.needsRehash("wrong", hash);
+        Assert.assertFalse(defaultStrategy.needsRehash("wrong", hash),
+                "Invalid password should not require rehash");
     }
 
     @Test
