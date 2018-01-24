@@ -6,17 +6,14 @@ package de.slevermann.pwhash;
  * It is not necessary to use this when upgrading parameters inside a single strategy.
  * However, this class is useful when migrating from one hash algorithm to another, which may have
  * different formats etc.
- *
- * @param <F> the strategy to migrate from
- * @param <T> the strategy to migrate to
  */
-public class MigrationStrategy<F extends HashStrategy, T extends HashStrategy> implements HashStrategy {
+public class MigrationStrategy implements HashStrategy {
 
-    private F oldStrategy;
+    private HashStrategy oldStrategy;
 
-    private T newStrategy;
+    private HashStrategy newStrategy;
 
-    public MigrationStrategy(F oldStrategy, T newStrategy) {
+    public MigrationStrategy(HashStrategy oldStrategy, HashStrategy newStrategy) {
         this.oldStrategy = oldStrategy;
         this.newStrategy = newStrategy;
     }
