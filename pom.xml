@@ -8,6 +8,38 @@
     <artifactId>pwhash</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>pwhash</name>
+    <description>A Password hashing library inspired by PHP's password_*() function family</description>
+    <url>https://github.com/sonOfRa/pwhash</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://raw.githubusercontent.com/sonOfRa/pwhash/master/LICENSE.md</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <url>https://github.com/sonOfRa/pwhash/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/sonOfRa/pwhash</url>
+        <connection>scm:git:https://github.com/sonOfRa/pwhash</connection>
+        <developerConnection>scm:git:git@github.com:sonOfRa/pwhash</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Simon Levermann</name>
+            <email>simon-github@slevermann.de</email>
+            <url>https://github.com/sonOfRa</url>
+            <timezone>Europe/Berlin</timezone>
+            <id>sonOfRa</id>
+        </developer>
+    </developers>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -35,6 +67,40 @@
         </dependency>
     </dependencies>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <build>
         <plugins>
             <plugin>
@@ -59,5 +125,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
