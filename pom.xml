@@ -12,6 +12,12 @@
     <description>A Password hashing library inspired by PHP's password_*() function family</description>
     <url>https://github.com/sonOfRa/pwhash</url>
 
+    <distributionManagement>
+        <site>
+            <id>ssh-slevermann</id>
+            <url>scpexe://slevermann.de/var/www/localhost/htdocs/pwhash</url>
+        </site>
+    </distributionManagement>
     <licenses>
         <license>
             <name>MIT License</name>
