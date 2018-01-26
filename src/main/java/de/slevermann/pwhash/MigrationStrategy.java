@@ -25,15 +25,37 @@ public class MigrationStrategy implements HashStrategy {
 
     @Override
     public boolean verify(String password, String hash) {
-        return oldStrategy.verify(password, hash) || newStrategy.verify(password, hash);
+        boolean result;
+        try {
+            result = oldStrategy.verify(password, hash);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+
+        if (result) {
+            return true;
+        }
+
+        try {
+            return newStrategy.verify(password, hash);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override
     public boolean needsRehash(String password, String hash) {
+        boolean result;
         /*
          * If the password matches the old style hash, we need to rehash
          */
-        if (oldStrategy.verify(password, hash)) {
+        try {
+            result = oldStrategy.verify(password, hash);
+        } catch (IllegalArgumentException ex) {
+            result = false;
+        }
+
+        if (result) {
             return true;
         }
 
@@ -41,7 +63,11 @@ public class MigrationStrategy implements HashStrategy {
          * If the password matches neither the old nor the new hash style,
          * we don't want to rehash
          */
-        if (!newStrategy.verify(password, hash)) {
+        try {
+            if (!newStrategy.verify(password, hash)) {
+                return false;
+            }
+        } catch (IllegalArgumentException ex) {
             return false;
         }
 
