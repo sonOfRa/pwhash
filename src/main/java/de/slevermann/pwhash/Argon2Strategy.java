@@ -109,19 +109,12 @@ public class Argon2Strategy implements HashStrategy {
         }
 
         String[] chunks = hash.split("\\$");
-        if (chunks.length != 6) {
-            /*
-             * Argon2 hashes have 6 chunks.
-             * If this is not the case, the hash is not a valid argon2 hash and needs to be rehashed
-             */
-            return true;
-        }
 
         /*
          * The first chunk is the name of the function used
          */
         String name = chunks[1];
-        String expectedName;
+        String expectedName = "INVALID";
         switch (type) {
             case ARGON2i:
                 expectedName = "argon2i";
@@ -132,8 +125,6 @@ public class Argon2Strategy implements HashStrategy {
             case ARGON2id:
                 expectedName = "argon2id";
                 break;
-            default:
-                expectedName = "INVALID";
         }
 
         /*
