@@ -37,6 +37,7 @@
         <url>https://github.com/sonOfRa/pwhash</url>
         <connection>scm:git:https://github.com/sonOfRa/pwhash</connection>
         <developerConnection>scm:git:git@github.com:sonOfRa/pwhash</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
