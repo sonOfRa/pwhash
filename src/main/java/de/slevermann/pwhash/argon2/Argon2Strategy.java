@@ -3,6 +3,7 @@ package de.slevermann.pwhash.argon2;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import de.slevermann.pwhash.HashStrategy;
+import de.slevermann.pwhash.InvalidHashException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,14 +65,17 @@ public abstract class Argon2Strategy implements HashStrategy {
         this.timeCost = timeCost;
     }
 
+    @Override
     public String hash(String password) {
         return argon2.hash(timeCost, memoryCost, parallelism, password);
     }
 
+    @Override
     public boolean verify(String password, String hash) {
         return argon2.verify(hash, password);
     }
 
+    @Override
     public boolean needsRehash(String password, String hash) {
         /*
          * If the passwords don't match, we do not rehash

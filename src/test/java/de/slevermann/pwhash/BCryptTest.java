@@ -1,7 +1,6 @@
 package de.slevermann.pwhash;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BCryptTest {
@@ -26,7 +25,7 @@ public class BCryptTest {
     }
 
     @Test
-    public static void defaultAuth() {
+    public static void defaultAuth() throws InvalidHashException {
         String hash = defaultStrategy.hash(PASSWORD);
 
         Assert.assertTrue(defaultStrategy.verify(PASSWORD, hash),
@@ -59,4 +58,11 @@ public class BCryptTest {
                 "Bigger work factor should require rehash");
     }
 
+    @Test
+    public static void rehashInvalidHash() {
+        String hash = "NOTAHASH";
+
+        Assert.assertFalse(defaultStrategy.needsRehash(PASSWORD, hash),
+                "Invalid hash should not warrant a rehash");
+    }
 }

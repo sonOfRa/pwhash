@@ -28,7 +28,7 @@ public class MigrationStrategy implements HashStrategy {
         boolean result;
         try {
             result = oldStrategy.verify(password, hash);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidHashException e) {
             result = false;
         }
 
@@ -38,7 +38,7 @@ public class MigrationStrategy implements HashStrategy {
 
         try {
             return newStrategy.verify(password, hash);
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidHashException e) {
             return false;
         }
     }
@@ -51,7 +51,7 @@ public class MigrationStrategy implements HashStrategy {
          */
         try {
             result = oldStrategy.verify(password, hash);
-        } catch (IllegalArgumentException ex) {
+        } catch (InvalidHashException ex) {
             result = false;
         }
 
@@ -67,7 +67,7 @@ public class MigrationStrategy implements HashStrategy {
             if (!newStrategy.verify(password, hash)) {
                 return false;
             }
-        } catch (IllegalArgumentException ex) {
+        } catch (InvalidHashException ex) {
             return false;
         }
 

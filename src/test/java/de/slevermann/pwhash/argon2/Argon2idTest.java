@@ -19,7 +19,6 @@ public class Argon2idTest extends Argon2Test {
         this.customTStrategy = new Argon2idStrategy(Argon2Strategy.DEFAULT_MEMORY_COST,
                 Argon2Strategy.DEFAULT_PARALLELISM, CUSTOM_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
-
     }
 
     @Test

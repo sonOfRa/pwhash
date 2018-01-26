@@ -29,19 +29,31 @@ public class BCryptStrategy implements HashStrategy {
         this.workFactor = workFactor;
     }
 
+    @Override
     public String hash(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt(workFactor));
     }
 
-    public boolean verify(String password, String hash) {
-        return BCrypt.checkpw(password, hash);
+    @Override
+    public boolean verify(String password, String hash) throws InvalidHashException {
+
+        try {
+            return BCrypt.checkpw(password, hash);
+        } catch (IllegalArgumentException ex) {
+            throw new InvalidHashException(ex);
+        }
     }
 
+    @Override
     public boolean needsRehash(String password, String hash) {
         /*
          * If the password fails to verify against the given hash, it might not be a valid hash. Abort here.
          */
-        if (!verify(password, hash)) {
+        try {
+            if (!verify(password, hash)) {
+                return false;
+            }
+        } catch (InvalidHashException ex) {
             return false;
         }
 

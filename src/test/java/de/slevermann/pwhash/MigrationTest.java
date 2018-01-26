@@ -30,7 +30,7 @@ public class MigrationTest {
     }
 
     @Test
-    public void correctPassword() {
+    public void correctPassword() throws InvalidHashException {
         String bcryptHash = bCryptStrategy.hash(PASSWORD);
         String argon2idHash = argon2idStrategy.hash(PASSWORD);
 
@@ -45,7 +45,7 @@ public class MigrationTest {
     }
 
     @Test
-    public void incorrectPassword() {
+    public void incorrectPassword() throws InvalidHashException {
         String bcryptHash = bCryptStrategy.hash(PASSWORD);
         String argon2idHash = argon2idStrategy.hash(PASSWORD);
 

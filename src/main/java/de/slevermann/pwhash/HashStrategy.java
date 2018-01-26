@@ -23,8 +23,9 @@ public interface HashStrategy {
      * @param password the password to verify
      * @param hash     a hash String as returned by {@link #hash(String)}
      * @return true if the password matches the hash, false otherwise
+     * @throws InvalidHashException may be thrown if the given hash was invalid
      */
-    boolean verify(String password, String hash);
+    boolean verify(String password, String hash) throws InvalidHashException;
 
     /**
      * Check whether a stored hash needs to be rehashed to comply with the options set by the implementation
