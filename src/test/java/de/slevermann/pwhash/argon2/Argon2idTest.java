@@ -1,5 +1,8 @@
 package de.slevermann.pwhash.argon2;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 public class Argon2idTest extends Argon2Test {
 
     Argon2idTest() {
@@ -17,5 +20,11 @@ public class Argon2idTest extends Argon2Test {
                 Argon2Strategy.DEFAULT_PARALLELISM, CUSTOM_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
 
+    }
+
+    @Test
+    public void checkDefault() {
+        Assert.assertTrue(Argon2Strategy.getDefault() instanceof Argon2idStrategy,
+                "Default strategy type should be id");
     }
 }
