@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/sonOfRa/pwhash.svg?branch=master)](https://travis-ci.org/sonOfRa/pwhash)
+[![codecov](https://codecov.io/gh/sonOfRa/pwhash/branch/master/graph/badge.svg)](https://codecov.io/gh/sonOfRa/pwhash)
+
 # pwhash
 
 Pwhash is a library inspired by ``password_hash()`` family of function in the PHP standard library. It is meant to offer
