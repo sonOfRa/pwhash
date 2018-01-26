@@ -32,7 +32,7 @@ public class Argon2Test {
         }
 
         Assert.assertEquals((int) optionMap.get("m"), Argon2Strategy.DEFAULT_MEMORY_COST, "Memory cost should be default");
-        Assert.assertEquals((int) optionMap.get("p"), Argon2Strategy.DEFAULT_THREADS, "Thread count should be default");
+        Assert.assertEquals((int) optionMap.get("p"), Argon2Strategy.DEFAULT_PARALLELISM, "Thread count should be default");
         Assert.assertEquals((int) optionMap.get("t"), Argon2Strategy.DEFAULT_TIME_COST, "Time cost should be default");
     }
 

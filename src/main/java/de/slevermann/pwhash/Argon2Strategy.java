@@ -23,7 +23,7 @@ public class Argon2Strategy implements HashStrategy {
     /**
      * Number of threads used
      */
-    public static final int DEFAULT_THREADS = 2;
+    public static final int DEFAULT_PARALLELISM = 2;
 
     /**
      * Number of iterations
@@ -47,7 +47,7 @@ public class Argon2Strategy implements HashStrategy {
 
     private int memoryCost;
 
-    private int threads;
+    private int parallelism;
 
     private int timeCost;
 
@@ -59,7 +59,7 @@ public class Argon2Strategy implements HashStrategy {
      * Construct an instance with all defaults
      */
     public Argon2Strategy() {
-        this(DEFAULT_TYPE, DEFAULT_MEMORY_COST, DEFAULT_THREADS, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
+        this(DEFAULT_TYPE, DEFAULT_MEMORY_COST, DEFAULT_PARALLELISM, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
     }
 
     /**
@@ -68,7 +68,7 @@ public class Argon2Strategy implements HashStrategy {
      * @param type the type of argon2 (i, id, d) to use
      */
     public Argon2Strategy(Argon2Factory.Argon2Types type) {
-        this(type, DEFAULT_MEMORY_COST, DEFAULT_THREADS, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
+        this(type, DEFAULT_MEMORY_COST, DEFAULT_PARALLELISM, DEFAULT_TIME_COST, DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH);
     }
 
     /**
@@ -76,24 +76,24 @@ public class Argon2Strategy implements HashStrategy {
      * <p>
      * For all arguments, there are default values present in the class to be used if not all values need to be customized
      *
-     * @param type       the type of argon2 (i, id, d) to use
-     * @param memoryCost the memory cost in kibibytes
-     * @param threads    the amount of threads to use
-     * @param timeCost   the amount of iterations to use
-     * @param saltLength the length of the salt
-     * @param hashLength the length of the hash
+     * @param type        the type of argon2 (i, id, d) to use
+     * @param memoryCost  the memory cost in kibibytes
+     * @param parallelism the amount of threads to use
+     * @param timeCost    the amount of iterations to use
+     * @param saltLength  the length of the salt
+     * @param hashLength  the length of the hash
      */
-    public Argon2Strategy(Argon2Factory.Argon2Types type, int memoryCost, int threads, int timeCost,
+    public Argon2Strategy(Argon2Factory.Argon2Types type, int memoryCost, int parallelism, int timeCost,
                           int saltLength, int hashLength) {
         this.type = type;
         this.memoryCost = memoryCost;
-        this.threads = threads;
+        this.parallelism = parallelism;
         this.timeCost = timeCost;
         this.argon2 = Argon2Factory.create(type, saltLength, hashLength);
     }
 
     public String hash(String password) {
-        return argon2.hash(timeCost, memoryCost, threads, password);
+        return argon2.hash(timeCost, memoryCost, parallelism, password);
     }
 
     public boolean verify(String password, String hash) {
@@ -146,7 +146,7 @@ public class Argon2Strategy implements HashStrategy {
         }
 
         String[] options = chunks[3].split(",");
-        Map<String, Integer> optionMap = new HashMap<String, Integer>();
+        Map<String, Integer> optionMap = new HashMap<>();
 
         for (String option : options) {
             String[] split = option.split("=");
@@ -157,7 +157,7 @@ public class Argon2Strategy implements HashStrategy {
             return true;
         }
 
-        if (optionMap.get("p") != threads) {
+        if (optionMap.get("p") != parallelism) {
             return true;
         }
 
