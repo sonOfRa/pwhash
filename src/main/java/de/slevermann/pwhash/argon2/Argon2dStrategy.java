@@ -2,6 +2,11 @@ package de.slevermann.pwhash.argon2;
 
 import de.mkammerer.argon2.Argon2Factory;
 
+/**
+ * A strategy implementation using argon2d for password hashing.
+ *
+ * @author Simon Levermann
+ */
 public class Argon2dStrategy extends Argon2Strategy {
     /**
      * Create a default argon2d instance

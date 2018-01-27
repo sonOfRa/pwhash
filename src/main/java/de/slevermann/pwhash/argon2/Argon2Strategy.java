@@ -11,6 +11,8 @@ import java.util.Map;
  * <p>
  * By default, argon2id is used, with reasonable parameters taken from the defaults
  * that PHP uses for its password_hash() API. All values can be adjusted.
+ *
+ * @author Simon Levermann
  */
 public abstract class Argon2Strategy implements HashStrategy {
 

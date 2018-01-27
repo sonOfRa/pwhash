@@ -6,6 +6,8 @@ package de.slevermann.pwhash;
  * It is not necessary to use this when upgrading parameters inside a single strategy.
  * However, this class is useful when migrating from one hash algorithm to another, which may have
  * different formats etc.
+ *
+ * @author Simon Levermann
  */
 public class MigrationStrategy implements HashStrategy {
 

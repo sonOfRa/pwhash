@@ -2,6 +2,8 @@ package de.slevermann.pwhash;
 
 /**
  * Exception to be thrown when an invalid hash is given
+ *
+ * @author Simon Levermann
  */
 public class InvalidHashException extends Exception {
 

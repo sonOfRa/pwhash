@@ -6,6 +6,8 @@ import org.mindrot.jbcrypt.BCrypt;
  * A strategy implementation using bcrypt
  * <p>
  * Uses a work factor of 10 by default.
+ *
+ * @author Simon Levermann
  */
 public class BCryptStrategy implements HashStrategy {
 
