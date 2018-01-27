@@ -119,4 +119,15 @@ public class MigrationTest {
         Assert.assertTrue(argon2idToBCryptStrategy.needsRehash(PASSWORD, bcryptHash),
                 "Rehash should be required when parameters differ from MigrationStrategy");
     }
+
+    @Test
+    public void invalidHash() {
+        String hash = "NOTAHASH";
+
+        Assert.assertFalse(bCryptToArgon2idStrategy.verify(PASSWORD, hash),
+                "Invalid hash should produce failed verification");
+        Assert.assertFalse(argon2idToBCryptStrategy.verify(PASSWORD, hash),
+                "Invalid hash should produce failed verification");
+    }
+
 }

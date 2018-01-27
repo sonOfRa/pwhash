@@ -65,4 +65,10 @@ public class BCryptTest {
         Assert.assertFalse(defaultStrategy.needsRehash(PASSWORD, hash),
                 "Invalid hash should not warrant a rehash");
     }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public static void invalidHash() throws InvalidHashException {
+        String hash = "NOTAHASH";
+        defaultStrategy.verify(PASSWORD, hash);
+    }
 }

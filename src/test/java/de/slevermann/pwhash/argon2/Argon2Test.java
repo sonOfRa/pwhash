@@ -94,4 +94,12 @@ public abstract class Argon2Test {
         Assert.assertTrue(customTStrategy.needsRehash(PASSWORD, hash),
                 "Custom time cost should require rehash");
     }
+
+    @Test
+    public void invalidHash() {
+        String hash = "NOTAHASH";
+
+        Assert.assertFalse(defaultStrategy.verify(PASSWORD, hash),
+                "Invalid hash should produce failed verification");
+    }
 }
