@@ -116,6 +116,7 @@ public abstract class Argon2Strategy implements HashStrategy {
     }
 
     /**
+     * Get a default argon2 instance
      * @return the default argon2 instance, which is argon2id
      */
     public static Argon2Strategy getDefault() {
