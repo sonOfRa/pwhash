@@ -5,5 +5,5 @@ cache:
   - $HOME/.m2
 install: true
 script:
-  - mvn clean install -Dgpg.skip=true
+  - mvn clean install -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip
   - bash <(curl -s https://codecov.io/bash)
