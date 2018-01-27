@@ -4,6 +4,8 @@ package de.slevermann.pwhash;
  * HashStrategy interface to unify different hashing strategies. Any options passed to the hashing functions
  * should be implemented as constructor parameters or constants. Constructor parameters are recommended, because it allows
  * easier migration to higher work factors or changing of other options like output length etc.
+ * <p>
+ * All Strings consumed and returned by implementations of this interface must be UTF-8
  *
  * @author Simon Levermann
  */

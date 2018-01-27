@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - verify() can now optionally throw InvalidHashException if the hash given is not verifiable
+- All functions expect and output UTF-8 Strings
 
 ## [1.0.0] - 2018-01-26
 ### Added
