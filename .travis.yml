@@ -5,5 +5,5 @@ cache:
   - $HOME/.m2
 install: true
 script:
-  - mvn clean install
+  - mvn clean install -Dgpg.skip=true
   - bash <(curl -s https://codecov.io/bash)
