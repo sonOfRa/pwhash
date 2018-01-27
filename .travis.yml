@@ -8,7 +8,6 @@ cache:
 install: true
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip
-  - bash <(curl -s https://codecov.io/bash)
 
 addons:
   sonarcloud:
