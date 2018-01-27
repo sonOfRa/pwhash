@@ -58,11 +58,11 @@ public class Pbkdf2WithHmacSha512Strategy extends Pbkdf2Strategy {
         }
 
         if (saltLength <= 0) {
-            throw new InvalidHashException("SaltLength must be >0");
+            throw new InvalidHashException("SaltLength must be > 0");
         }
 
         if (dkLength <= 0) {
-            throw new InvalidHashException("dkLength must be >0");
+            throw new InvalidHashException("dkLength must be > 0");
         }
 
         if (iterations <= 0) {

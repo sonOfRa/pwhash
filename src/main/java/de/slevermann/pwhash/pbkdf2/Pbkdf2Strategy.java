@@ -91,6 +91,9 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
             throw new InvalidHashException("Invalid hash parameter format");
         }
         int extractedIterations;
+        if (!opts[0].equals("iterations")) {
+            throw new InvalidHashException("Invalid hash parameter name");
+        }
         try {
             extractedIterations = Integer.parseInt(opts[1]);
         } catch (NumberFormatException ex) {
