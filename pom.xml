@@ -26,8 +26,8 @@
     </distributionManagement>
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>https://raw.githubusercontent.com/sonOfRa/pwhash/master/LICENSE.md</url>
+            <name>Apache 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
