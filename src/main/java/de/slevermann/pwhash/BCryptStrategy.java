@@ -57,8 +57,8 @@ public class BCryptStrategy implements HashStrategy {
             return false;
         }
 
-        int workFactor = Integer.parseInt(hash.split("\\$")[2]);
+        int extractedWorkFactor = Integer.parseInt(hash.split("\\$")[2]);
 
-        return workFactor != this.workFactor;
+        return extractedWorkFactor != this.workFactor;
     }
 }
