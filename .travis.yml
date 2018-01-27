@@ -2,8 +2,16 @@ language: java
 jdk: oraclejdk8
 cache:
   directories:
-  - $HOME/.m2
+  - '$HOME/.m2'
+  - '$HOME/.sonar/cache'
+
 install: true
 script:
-  - mvn clean install -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dgpg.skip=true -Dmaven.javadoc.skip=true -Dmaven.source.skip
   - bash <(curl -s https://codecov.io/bash)
+
+addons:
+  sonarcloud:
+    organization: "sonofra-github"
+    token:
+      secure: "qHNvmCmrT+DsbO7XTZBccl0Sgl9VeNzAzQcQdHiaLM1fCyMb2ARsjSQCvdNs6Ha8/x0E11eliB3mASVGyHCC0ciOUpIasKRF/Ig16ABfnA6nZg/iep4xFGe/3JoK7g9J73lVqSjL8GVgbGn2B9zYD7rG3miWYqiTG1NZAQ2RsWS/2cpPpJIV1GcOLXZG7P/xrheztlyKyUTSp77xDW635YedeflH2rdsHZ2XadXufQdnUVqI7NOaAVglFEZRAR1L8S4QnstaEs1ShI5t06NWnouTIWgUotOtLT8kM4BPHBnoZi0l9eQZi39oGhc2unYvc1Q0QLINPZJhJU9PZw5eYPp95dB+88kzXJam+RX+ORDyaBEHM1EjPUfbRTcccZtJHNBln8VQMZ6de0vvD2yx0mNFeeSHSEqJsu7iefx2RegY34y1PdcR5h/XxXYWNvhpKr6Pj4f6rWOkShYZwy8kXr3J1EbMKWDRsEwK6I1RlovuusjwY23frWyjPsPy/BXl1rFD0lmtbFxDeCBFrMPfcmUNraCmmWwv1ndm45Z3wu29NsBX+XXSjPNGQG7XUpCtuzGsqPuLbLGcZSTXobVLPAISQhlhQpcFOf7ZwrgvJ0QY42DusCBHz67/fh8sE6Htg6XrfR7RUS0l4tEP2TGymLG/jn2VfVwedPBsUijA6Mg="
