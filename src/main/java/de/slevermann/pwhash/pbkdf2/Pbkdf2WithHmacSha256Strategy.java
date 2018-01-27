@@ -18,18 +18,18 @@ package de.slevermann.pwhash.pbkdf2;
 import de.slevermann.pwhash.InvalidHashException;
 
 /**
- * A strategy implementation using PBKDF2WithHmacSHA512 for password hashing.
+ * A strategy implementation using PBKDF2WithHmacSHA256 for password hashing.
  *
  * @author Simon Levermann
  */
-public class Pbkdf2WithHmacSha512Strategy extends Pbkdf2Strategy {
-    private static final String PBKDF_ALGORITHM = "PBKDF2WithHmacSHA512";
+public class Pbkdf2WithHmacSha256Strategy extends Pbkdf2Strategy {
+    private static final String PBKDF_ALGORITHM = "PBKDF2WithHmacSHA256";
     public static final int DEFAULT_HASH_LENGTH = 32;
 
     /**
-     * Construct a default PBKDF2WithHmacSHA512 instance
+     * Construct a default PBKDF2WithHmacSHA256 instance
      */
-    public Pbkdf2WithHmacSha512Strategy() {
+    public Pbkdf2WithHmacSha256Strategy() {
         this(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, DEFAULT_HASH_LENGTH, Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
@@ -38,22 +38,22 @@ public class Pbkdf2WithHmacSha512Strategy extends Pbkdf2Strategy {
      * @param dkLength   length of the generated hash
      * @param iterations amount of iterations
      */
-    private Pbkdf2WithHmacSha512Strategy(int saltLength, int dkLength, int iterations) {
+    private Pbkdf2WithHmacSha256Strategy(int saltLength, int dkLength, int iterations) {
         super(saltLength, dkLength, iterations, PBKDF_ALGORITHM);
     }
 
     /**
-     * Acquire a custom PBKDF2WithHmacSHA512 instance
+     * Acquire a custom PBKDF2WithHmacSHA256 instance
      *
      * @param saltLength length of the salt to be generated (in bytes)
      * @param dkLength   length of the hash output (in bytes)
      * @param iterations amount of iterations
-     * @return a newly constructed PBKDF2WithHmacSHA512 instance
-     * @throws InvalidHashException if dkLength is &gt; 64. This is because for password hashing, PBKDF dklength should
+     * @return a newly constructed PBKDF2WithHmacSHA256 instance
+     * @throws InvalidHashException if dkLength is &gt; 32. This is because for password hashing, PBKDF dklength should
      *                              never exceed the output length of the underlying hash function.
      */
-    public static Pbkdf2WithHmacSha512Strategy getInstance(int saltLength, int dkLength, int iterations) throws InvalidHashException {
-        if (dkLength > 64) {
+    public static Pbkdf2WithHmacSha256Strategy getInstance(int saltLength, int dkLength, int iterations) throws InvalidHashException {
+        if (dkLength > 32) {
             throw new InvalidHashException("dkLength cannot be larger than output length of the hash function.");
         }
 
@@ -68,6 +68,6 @@ public class Pbkdf2WithHmacSha512Strategy extends Pbkdf2Strategy {
         if (iterations <= 0) {
             throw new InvalidHashException("Iteration count must be > 0");
         }
-        return new Pbkdf2WithHmacSha512Strategy(saltLength, dkLength, iterations);
+        return new Pbkdf2WithHmacSha256Strategy(saltLength, dkLength, iterations);
     }
 }
