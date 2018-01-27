@@ -53,7 +53,7 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
         try {
             this.keyFactory = SecretKeyFactory.getInstance(id);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Missing " + id + " implementation", e);
+            throw new IllegalStateException("Missing " + id + " implementation", e);
         }
         this.id = id.toLowerCase();
     }
@@ -129,7 +129,9 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
         try {
             return keyFactory.generateSecret(keySpec).getEncoded();
         } catch (InvalidKeySpecException e) {
-            throw new RuntimeException(e);
+            String message = "Error on secret generation. This may mean that cryptographic primitives are missing from the JDK.\n";
+            message += "It may also mean that this is a severe bug in the pwhash library.";
+            throw new IllegalStateException(message, e);
         }
     }
 }
