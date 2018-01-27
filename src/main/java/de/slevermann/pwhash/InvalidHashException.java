@@ -1,7 +1,5 @@
 package de.slevermann.pwhash;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
-
 /**
  * Exception to be thrown when an invalid hash is given
  */

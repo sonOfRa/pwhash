@@ -1,9 +1,7 @@
 package de.slevermann.pwhash.argon2;
 
 import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import de.slevermann.pwhash.HashStrategy;
-import de.slevermann.pwhash.InvalidHashException;
 
 import java.util.HashMap;
 import java.util.Map;
