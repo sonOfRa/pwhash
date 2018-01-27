@@ -5,6 +5,7 @@
 - verify() can now optionally throw InvalidHashException if the hash given is not verifiable
 - All functions expect and output UTF-8 Strings
 - The project is now licensed under the Apache License
+- Support for PBKDF2WithHmacSHA{1,256,512}
 
 ## [1.0.0] - 2018-01-26
 ### Added

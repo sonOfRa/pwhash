@@ -26,6 +26,7 @@ public class Pbkdf2Provider {
         return new Object[][]{
                 {new Pbkdf2WithHmacSha512Strategy(), "PBKDF2WithHmacSHA512".toLowerCase()},
                 {new Pbkdf2WithHmacSha256Strategy(), "PBKDF2WithHmacSHA256".toLowerCase()},
+                {new Pbkdf2WithHmacSha1Strategy(), "PBKDF2WithHmacSHA1".toLowerCase()},
         };
     }
 
@@ -36,6 +37,8 @@ public class Pbkdf2Provider {
                         Pbkdf2WithHmacSha512Strategy.DEFAULT_HASH_LENGTH, CUSTOM_ITERATION_COUNT), CUSTOM_ITERATION_COUNT},
                 {Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
                         Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH, CUSTOM_ITERATION_COUNT), CUSTOM_ITERATION_COUNT},
+                {Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
+                        Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH, CUSTOM_ITERATION_COUNT), CUSTOM_ITERATION_COUNT},
         };
     }
 
@@ -48,6 +51,9 @@ public class Pbkdf2Provider {
                 {new Pbkdf2WithHmacSha256Strategy(),
                         Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
                                 Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH, CUSTOM_ITERATION_COUNT)},
+                {new Pbkdf2WithHmacSha1Strategy(),
+                        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
+                                Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH, CUSTOM_ITERATION_COUNT)},
         };
     }
 }
