@@ -29,13 +29,14 @@ import java.util.Base64;
 /**
  * A strategy implementation using PBKDF2 for password hashing.
  * <p>
- * By default, PBKDF2WithHMACSha512 is used.
+ * By default, PBKDF2WithHmacSHA512 is used.
  *
  * @author Simon Levermann
  */
 public abstract class Pbkdf2Strategy implements HashStrategy {
 
     public static final int DEFAULT_ITERATIONS = 20000;
+    public static final int DEFAULT_SALT_LENGTH = 16;
 
     private SecretKeyFactory keyFactory;
     private String id;
@@ -77,11 +78,24 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
     public boolean verify(String password, String hash) throws InvalidHashException {
         String[] chunks = hash.split("\\$");
 
+        if (chunks.length != 5) {
+            throw new InvalidHashException("Invalid hash format");
+        }
         if (!chunks[1].equals(id)) {
             throw new InvalidHashException("Invalid hash identifier");
         }
 
-        int extractedIterations = Integer.parseInt(chunks[2].split("=")[1]);
+        String[] opts = chunks[2].split("=");
+
+        if (opts.length != 2) {
+            throw new InvalidHashException("Invalid hash parameter format");
+        }
+        int extractedIterations;
+        try {
+            extractedIterations = Integer.parseInt(opts[1]);
+        } catch (NumberFormatException ex) {
+            throw new InvalidHashException("Non-numeric iteration count", ex);
+        }
 
         Base64.Decoder b64Decoder = Base64.getDecoder();
         byte[] salt = b64Decoder.decode(chunks[3]);
@@ -94,15 +108,12 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
 
     @Override
     public boolean needsRehash(String password, String hash) {
-        boolean result;
         try {
-            result = verify(password, hash);
+            if (!verify(password, hash)) {
+                return false;
+            }
         } catch (InvalidHashException ex) {
             return false;
-        }
-
-        if (result) {
-            return true;
         }
 
         int extractedIterations = Integer.parseInt(hash.split("\\$")[2].split("=")[1]);
