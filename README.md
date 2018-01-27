@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/sonOfRa/pwhash.svg?branch=master)](https://travis-ci.org/sonOfRa/pwhash)
-[![codecov](https://codecov.io/gh/sonOfRa/pwhash/branch/master/graph/badge.svg)](https://codecov.io/gh/sonOfRa/pwhash)
+[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=de.slevermann:pwhash)](https://sonarcloud.io/dashboard/index/de.slevermann:pwhash)
+[![SonarCloud Coverage](https://sonarcloud.io/api/badges/measure?key=de.slevermann:pwhash&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=de.slevermann:pwhash)
+[![SonarCloud Bugs](https://sonarcloud.io/api/badges/measure?key=de.slevermann:pwhash&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=de.slevermann:pwhash)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/badges/measure?key=de.slevermann:pwhash&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=de.slevermann:pwhash)
 
 # pwhash
 
