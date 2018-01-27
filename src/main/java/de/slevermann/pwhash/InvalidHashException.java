@@ -23,12 +23,6 @@ package de.slevermann.pwhash;
 public class InvalidHashException extends Exception {
 
     /**
-     * Construct an exception with no further information
-     */
-    public InvalidHashException() {
-    }
-
-    /**
      * Construct an exception with given cause and message
      *
      * @param message the error message
