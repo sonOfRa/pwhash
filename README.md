@@ -53,7 +53,7 @@ Currently, the library supports the flavors using SHA512, SHA256 and SHA1.
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
