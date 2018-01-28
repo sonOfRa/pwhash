@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.0.0] - 2018-01-28
 ### Changed
 - verify() can now optionally throw InvalidHashException if the hash given is not verifiable
 - All functions expect and output UTF-8 Strings
