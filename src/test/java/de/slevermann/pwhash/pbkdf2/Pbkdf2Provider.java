@@ -21,7 +21,7 @@ import org.testng.annotations.DataProvider;
 public class Pbkdf2Provider {
     private static final int CUSTOM_ITERATION_COUNT = 30000;
 
-    @DataProvider
+    @DataProvider(parallel = true)
     Object[][] defaultFactory() {
         return new Object[][]{
                 {new Pbkdf2WithHmacSha512Strategy(), "PBKDF2WithHmacSHA512".toLowerCase()},
@@ -30,7 +30,7 @@ public class Pbkdf2Provider {
         };
     }
 
-    @DataProvider
+    @DataProvider(parallel = true)
     Object[][] customFactory() throws InvalidHashException {
         return new Object[][]{
                 {Pbkdf2WithHmacSha512Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
@@ -42,7 +42,7 @@ public class Pbkdf2Provider {
         };
     }
 
-    @DataProvider
+    @DataProvider(parallel = true)
     Object[][] needRehashFactory() throws InvalidHashException {
         return new Object[][]{
                 {new Pbkdf2WithHmacSha512Strategy(),
