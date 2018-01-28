@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author Simon Levermann
  */
-public abstract class Argon2Strategy implements HashStrategy {
+public class Argon2Strategy implements HashStrategy {
 
 
     /**
@@ -57,11 +57,11 @@ public abstract class Argon2Strategy implements HashStrategy {
      */
     public static final int DEFAULT_HASH_LENGTH = 32;
 
-    protected int memoryCost;
+    private int memoryCost;
 
-    protected int parallelism;
+    private int parallelism;
 
-    protected int timeCost;
+    private int timeCost;
 
     protected Argon2 argon2;
 
@@ -74,7 +74,7 @@ public abstract class Argon2Strategy implements HashStrategy {
      * @param parallelism the amount of threads to use
      * @param timeCost    the amount of iterations to use
      */
-    public Argon2Strategy(int memoryCost, int parallelism, int timeCost) {
+    protected Argon2Strategy(int memoryCost, int parallelism, int timeCost) {
         this.memoryCost = memoryCost;
         this.parallelism = parallelism;
         this.timeCost = timeCost;

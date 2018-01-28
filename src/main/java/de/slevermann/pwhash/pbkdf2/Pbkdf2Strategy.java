@@ -33,7 +33,7 @@ import java.util.Base64;
  *
  * @author Simon Levermann
  */
-public abstract class Pbkdf2Strategy implements HashStrategy {
+public class Pbkdf2Strategy implements HashStrategy {
 
     public static final int DEFAULT_ITERATIONS = 20000;
     public static final int DEFAULT_SALT_LENGTH = 16;
@@ -45,7 +45,7 @@ public abstract class Pbkdf2Strategy implements HashStrategy {
     private int dkLength;
     private int iterations;
 
-    public Pbkdf2Strategy(int saltLength, int dkLength, int iterations, String id) {
+    protected Pbkdf2Strategy(int saltLength, int dkLength, int iterations, String id) {
         this.saltLength = saltLength;
         this.dkLength = dkLength;
         this.iterations = iterations;
