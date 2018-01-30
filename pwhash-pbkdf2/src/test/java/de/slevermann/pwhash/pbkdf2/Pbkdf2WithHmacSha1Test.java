@@ -16,50 +16,52 @@
 package de.slevermann.pwhash.pbkdf2;
 
 import de.slevermann.pwhash.InvalidHashException;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2Strategy;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2WithHmacSha1Strategy;
 import org.testng.annotations.Test;
 
-public class Pbkdf2WithHmacSha256Test {
+public class Pbkdf2WithHmacSha1Test {
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "dkLength cannot be larger.*")
     public void highDkLength() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, 33,
+        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, 21,
                 Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "dkLength must be > 0")
     public void negativeDkLength() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, -1,
+        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, -1,
                 Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "dkLength must be > 0")
     public void zeroDkLength() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, 0,
+        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH, 0,
                 Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "SaltLength must be > 0")
     public void negativeSaltLength() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(-1, Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH,
+        Pbkdf2WithHmacSha1Strategy.getInstance(-1, Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH,
                 Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "SaltLength must be > 0")
     public void zeroSaltLength() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(0, Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH,
+        Pbkdf2WithHmacSha1Strategy.getInstance(0, Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH,
                 Pbkdf2Strategy.DEFAULT_ITERATIONS);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Iteration count must be > 0")
     public void negativeIterationCount() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
-                Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH, -1);
+        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
+                Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH, -1);
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Iteration count must be > 0")
     public void zeroIterationCount() throws InvalidHashException {
-        Pbkdf2WithHmacSha256Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
-                Pbkdf2WithHmacSha256Strategy.DEFAULT_HASH_LENGTH, 0);
+        Pbkdf2WithHmacSha1Strategy.getInstance(Pbkdf2Strategy.DEFAULT_SALT_LENGTH,
+                Pbkdf2WithHmacSha1Strategy.DEFAULT_HASH_LENGTH, 0);
     }
 
 }

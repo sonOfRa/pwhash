@@ -16,6 +16,10 @@
 package de.slevermann.pwhash.pbkdf2;
 
 import de.slevermann.pwhash.InvalidHashException;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2Strategy;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2WithHmacSha1Strategy;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2WithHmacSha256Strategy;
+import de.slevermann.pwhash.pbkdf2.Pbkdf2WithHmacSha512Strategy;
 import org.testng.annotations.DataProvider;
 
 public class Pbkdf2Provider {
