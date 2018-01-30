@@ -54,11 +54,20 @@ For the most recent released version, use
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
-    <artifactId>pwhash</artifactId>
-    <version>2.0.0</version>
+    <artifactId>pwhash-core</artifactId>
+    <version>2.1.0</version>
 </dependency>
 ```
 Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
+#### PBKDF2
+Support for PBKDF 2 has been moved to its own module. If you need support for PBKDF2 functions, you should also depend on
+```xml
+<dependency>
+    <groupId>de.slevermann</groupId>
+    <artifactId>pwhash-pbkdf2</artifactId>
+    <version>2.1.0</version>
+</dependency>
+```
 
 ### Development version
 For development snapshots, use
@@ -66,17 +75,7 @@ For development snapshots, use
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-core</artifactId>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>2.2.0-SNAPSHOT</version>
 </dependency>
 ```
 Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
-
-#### PBKDF2
-Support for PBKDF 2 has been moved to its own module. If you need support for PBKDF2 functions, you should also depend on
-```xml
-<dependency>
-    <groupId>de.slevermann</groupId>
-    <artifactId>pwhash-pbkdf2</artifactId>
-    <version>2.1.0-SNAPSHOT</version>
-</dependency>
-```
