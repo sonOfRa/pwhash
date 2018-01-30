@@ -49,6 +49,8 @@ PBKDF2 is supported for use with older, existing password hashes. It should not 
 Currently, the library supports the flavors using SHA512, SHA256 and SHA1.
 
 ## Maven dependency
+### Release version
+For the most recent released version, use
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
@@ -57,3 +59,24 @@ Currently, the library supports the flavors using SHA512, SHA256 and SHA1.
 </dependency>
 ```
 Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
+
+### Development version
+For development snapshots, use
+```xml
+<dependency>
+    <groupId>de.slevermann</groupId>
+    <artifactId>pwhash-core</artifactId>
+    <version>2.1.0-SNAPSHOT</version>
+</dependency>
+```
+Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
+
+#### PBKDF2
+Support for PBKDF 2 has been moved to its own module. If you need support for PBKDF2 functions, you should also depend on
+```xml
+<dependency>
+    <groupId>de.slevermann</groupId>
+    <artifactId>pwhash-pbkdf2</artifactId>
+    <version>2.1.0-SNAPSHOT</version>
+</dependency>
+```

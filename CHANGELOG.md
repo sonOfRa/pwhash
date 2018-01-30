@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Maven multi-module architecture
 
 ## [2.0.0] - 2018-01-28
 ### Changed
