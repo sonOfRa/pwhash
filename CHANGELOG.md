@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Example code
+- Automatic-Module-Names for JDK 9 module support
 
 ## [2.1.0] - 2018-01-30
 ### Changed
