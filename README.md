@@ -24,7 +24,7 @@ provided in the [pom](pom.xml). This means that when depending on this library, 
 ```xml
 <dependency>
     <groupId>de.mkammerer</groupId>
-    <artifactId>argon2-jvm</artifactId>
+    <artifactId>argon2-jvm-nolibs</artifactId>
     <version>2.3</version>
 </dependency>
 ```
@@ -32,7 +32,7 @@ or
 ```xml
 <dependency>
     <groupId>de.mkammerer</groupId>
-    <artifactId>argon2-jvm-nolibs</artifactId>
+    <artifactId>argon2-jvm</artifactId>
     <version>2.3</version>
 </dependency>
 ```
