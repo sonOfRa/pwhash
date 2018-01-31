@@ -73,5 +73,6 @@
     <modules>
         <module>examples-argon2</module>
         <module>examples-common</module>
+        <module>examples-migration</module>
     </modules>
 </project>
