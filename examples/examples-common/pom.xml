@@ -25,10 +25,6 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>de.slevermann</groupId>
-            <artifactId>pwhash-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>

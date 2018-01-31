@@ -55,7 +55,7 @@ For the most recent released version, use
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-core</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
 </dependency>
 ```
 Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
@@ -65,7 +65,7 @@ Support for PBKDF 2 has been moved to its own module. If you need support for PB
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-pbkdf2</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
 </dependency>
 ```
 
