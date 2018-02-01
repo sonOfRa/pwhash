@@ -1,4 +1,4 @@
-package de.slevermann.pwhash.examples;
+package de.slevermann.pwhash.examples.common;
 
 import lombok.Data;
 

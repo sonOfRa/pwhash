@@ -24,6 +24,7 @@
         <dependency>
             <groupId>de.mkammerer</groupId>
             <artifactId>argon2-jvm</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -35,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.slevermann.pwhash.examples.Argon2Example</mainClass>
+                            <mainClass>de.slevermann.pwhash.examples.argon2.Argon2Example</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -53,7 +54,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.slevermann.pwhash.examples.Argon2Example</mainClass>
+                                    <mainClass>de.slevermann.pwhash.examples.argon2.Argon2Example</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

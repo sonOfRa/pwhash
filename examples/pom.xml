@@ -67,6 +67,11 @@
                         <createDependencyReducedPom>false</createDependencyReducedPom>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -74,5 +79,6 @@
         <module>examples-argon2</module>
         <module>examples-common</module>
         <module>examples-migration</module>
+        <module>examples-java9</module>
     </modules>
 </project>

@@ -1,9 +1,11 @@
-package de.slevermann.pwhash.examples;
+package de.slevermann.pwhash.examples.argon2;
 
 import de.slevermann.pwhash.HashStrategy;
 import de.slevermann.pwhash.InvalidHashException;
 import de.slevermann.pwhash.argon2.Argon2Strategy;
 import de.slevermann.pwhash.argon2.Argon2idStrategy;
+import de.slevermann.pwhash.examples.common.User;
+import de.slevermann.pwhash.examples.common.UserDao;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 

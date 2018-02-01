@@ -1,4 +1,4 @@
-package de.slevermann.pwhash.examples;
+package de.slevermann.pwhash.examples.common;
 
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;

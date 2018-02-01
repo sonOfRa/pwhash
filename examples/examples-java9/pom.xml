@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pwhash-examples-migration</artifactId>
+    <artifactId>pwhash-examples-java9</artifactId>
     <version>2.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>examples-migration</name>
+    <name>examples-java9</name>
 
     <parent>
         <groupId>de.slevermann</groupId>
@@ -40,7 +40,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.slevermann.pwhash.examples.migration.MigrationExample</mainClass>
+                            <mainClass>de.slevermann.pwhash.examples.module.Java9Example</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -58,7 +58,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>de.slevermann.pwhash.examples.migration.MigrationExample</mainClass>
+                                    <mainClass>de.slevermann.pwhash.examples.module.Java9Example</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -67,4 +67,9 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <maven.compiler.source>1.9</maven.compiler.source>
+        <maven.compiler.target>1.9</maven.compiler.target>
+        <maven.compiler.release>9</maven.compiler.release>
+    </properties>
 </project>
