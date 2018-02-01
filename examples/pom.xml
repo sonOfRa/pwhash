@@ -79,6 +79,5 @@
         <module>examples-argon2</module>
         <module>examples-common</module>
         <module>examples-migration</module>
-        <module>examples-java9</module>
     </modules>
 </project>
