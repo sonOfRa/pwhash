@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.0] 2018-02-04
 ### Removed
 - Public custom constructors for BCrypt and Argon2{i,id,d}
 
