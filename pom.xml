@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>pwhash-parent</name>
 
@@ -38,7 +38,7 @@
         <url>https://github.com/sonOfRa/pwhash</url>
         <connection>scm:git:https://github.com/sonOfRa/pwhash</connection>
         <developerConnection>scm:git:git@github.com:sonOfRa/pwhash</developerConnection>
-        <tag>v3.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <url>https://pwhash.slevermann.de/</url>
