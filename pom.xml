@@ -9,6 +9,7 @@
     <modules>
         <module>pwhash-core</module>
         <module>pwhash-pbkdf2</module>
+	<module>pwhash-crypt</module>
         <module>pwhash-migrationtest</module>
     </modules>
 
@@ -258,6 +259,11 @@
             <dependency>
                 <groupId>de.slevermann</groupId>
                 <artifactId>pwhash-pbkdf2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.slevermann</groupId>
+                <artifactId>pwhash-crypt</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

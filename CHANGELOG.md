@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- (WIP) Support for SHA512Crypt and SHA256Crypt
 
 ## [3.0.0] 2018-02-04
 ### Removed

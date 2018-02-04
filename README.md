@@ -72,12 +72,22 @@ For core support, you need to depend on
 ```
 and your choice of one argon2 provider as listed above.
 
+#### PBKDF2 support
 If you also need PBKDF2 support for legacy reasons, use
 
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-pbkdf2</artifactId>
+</dependency>
+```
+
+#### Unix crypt support
+In case you need to support old crypt-style password hashes, use
+```xml
+<dependency>
+    <groupId>de.slevermann</groupId>
+    <artifactId>pwhash-crypt</artifactId>
 </dependency>
 ```
 
