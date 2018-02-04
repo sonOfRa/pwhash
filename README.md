@@ -25,7 +25,6 @@ provided in the [pom](pom.xml). This means that when depending on this library, 
 <dependency>
     <groupId>de.mkammerer</groupId>
     <artifactId>argon2-jvm-nolibs</artifactId>
-    <version>2.3</version>
 </dependency>
 ```
 or
@@ -33,7 +32,6 @@ or
 <dependency>
     <groupId>de.mkammerer</groupId>
     <artifactId>argon2-jvm</artifactId>
-    <version>2.3</version>
 </dependency>
 ```
 If you depend on the former, you will need to install the argon2 native libraries on your system. If you depend on the latter,
@@ -50,32 +48,45 @@ Currently, the library supports the flavors using SHA512, SHA256 and SHA1.
 
 ## Maven dependency
 ### Release version
-For the most recent released version, use
+The root ``pom.xml`` of this project functions as a [BOM](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html).
+In order to use it, add this to your ``pom.xml``
+```xml
+<dependency>
+    <groupId>de.slevermann</groupId>
+    <artifactId>pwhash</artifactId>
+    <version>3.0.0</version>
+    <scope>import</scope>
+    <type>pom</type>
+</dependency>
+```
+
+After this, you can define your dependencies without specifying versions, as they are handled by the BOM.
+For core support, you need to depend on
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-core</artifactId>
-    <version>2.1.1</version>
 </dependency>
 ```
-Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
-#### PBKDF2
-Support for PBKDF 2 has been moved to its own module. If you need support for PBKDF2 functions, you should also depend on
+and your choice of one argon2 provider as listed above.
+
+If you also need PBKDF2 support for legacy reasons, use
+
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash-pbkdf2</artifactId>
-    <version>2.1.1</version>
 </dependency>
 ```
 
 ### Development version
-For development snapshots, use
+For the current development snapshot version, use
 ```xml
 <dependency>
     <groupId>de.slevermann</groupId>
-    <artifactId>pwhash-core</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <artifactId>pwhash</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+    <scope>import</scope>
+    <type>pom</type>
 </dependency>
-```
-Note that you will also need to depend on one of the provider libraries for argon2, as listed above.
+``` 

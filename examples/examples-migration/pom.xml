@@ -2,14 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>pwhash-examples-migration</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>examples-migration</name>
 
     <parent>
         <groupId>de.slevermann</groupId>
         <artifactId>pwhash-examples</artifactId>
-        <version>2.2.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
     <dependencies>
         <dependency>
@@ -23,7 +22,7 @@
         <dependency>
             <groupId>de.slevermann</groupId>
             <artifactId>pwhash-examples-common</artifactId>
-            <version>2.2.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>de.mkammerer</groupId>

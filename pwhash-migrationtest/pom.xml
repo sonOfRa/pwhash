@@ -27,13 +27,10 @@
         <dependency>
             <groupId>de.slevermann</groupId>
             <artifactId>pwhash-pbkdf2</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>de.mkammerer</groupId>
             <artifactId>argon2-jvm</artifactId>
-            <version>2.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

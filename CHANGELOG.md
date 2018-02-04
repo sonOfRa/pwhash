@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Maven BOM architecture 
 
 ## [2.1.1] 2018-01-31
 ### Added

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash</artifactId>
@@ -61,6 +62,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <argon2.version>2.3</argon2.version>
     </properties>
 
     <reporting>
@@ -247,20 +249,41 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.13.1</version>
-            </dependency>
+
+            <!-- Versions for internal libraries -->
             <dependency>
                 <groupId>de.slevermann</groupId>
                 <artifactId>pwhash-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>de.slevermann</groupId>
+                <artifactId>pwhash-pbkdf2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- External crypto dependencies -->
+            <dependency>
                 <groupId>de.mkammerer</groupId>
                 <artifactId>argon2-jvm</artifactId>
-                <version>2.3</version>
+                <version>${argon2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.mkammerer</groupId>
+                <artifactId>argon2-jvm-nolibs</artifactId>
+                <version>${argon2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.4</version>
+            </dependency>
+
+            <!-- Other dependencies -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.13.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
