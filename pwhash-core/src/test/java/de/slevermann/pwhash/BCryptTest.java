@@ -19,13 +19,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BCryptTest {
-    private static final BCryptStrategy defaultStrategy = new BCryptStrategy();
-    private static final BCryptStrategy customWorkFactor = new BCryptStrategy(12);
+    private final BCryptStrategy defaultStrategy = new BCryptStrategy();
+    private final BCryptStrategy customWorkFactor = BCryptStrategy.getInstance(12);
     private static final String PASSWORD = "The Magic Words are Squeamish Ossifrage";
 
+    public BCryptTest() throws InvalidHashException {
+    }
 
     @Test
-    public static void defaultType() {
+    public void defaultType() {
         String hash = defaultStrategy.hash(PASSWORD);
         String[] chunks = hash.split("\\$");
         Assert.assertTrue(chunks[1].equals("2a"), "Identifier should be 2a");
@@ -33,14 +35,14 @@ public class BCryptTest {
     }
 
     @Test
-    public static void customWorkFactor() {
+    public void customWorkFactor() {
         String hash = customWorkFactor.hash(PASSWORD);
         String[] chunks = hash.split("\\$");
         Assert.assertTrue(chunks[2].equals("12"), "Work factor should be 12");
     }
 
     @Test
-    public static void defaultAuth() throws InvalidHashException {
+    public void defaultAuth() throws InvalidHashException {
         String hash = defaultStrategy.hash(PASSWORD);
 
         Assert.assertTrue(defaultStrategy.verify(PASSWORD, hash),
@@ -50,7 +52,7 @@ public class BCryptTest {
     }
 
     @Test
-    public static void noRehash() {
+    public void noRehash() {
         String hash = defaultStrategy.hash(PASSWORD);
 
         Assert.assertFalse(defaultStrategy.needsRehash(PASSWORD, hash),
@@ -58,7 +60,7 @@ public class BCryptTest {
     }
 
     @Test
-    public static void rehashWrongPassword() {
+    public void rehashWrongPassword() {
         String hash = defaultStrategy.hash(PASSWORD);
 
         Assert.assertFalse(defaultStrategy.needsRehash("wrong", hash),
@@ -66,15 +68,15 @@ public class BCryptTest {
     }
 
     @Test
-    public static void rehash() {
-        String hash = new BCryptStrategy(12).hash(PASSWORD);
+    public void rehash() {
+        String hash = customWorkFactor.hash(PASSWORD);
 
         Assert.assertTrue(defaultStrategy.needsRehash(PASSWORD, hash),
                 "Bigger work factor should require rehash");
     }
 
     @Test
-    public static void rehashInvalidHash() {
+    public void rehashInvalidHash() {
         String hash = "NOTAHASH";
 
         Assert.assertFalse(defaultStrategy.needsRehash(PASSWORD, hash),
@@ -82,8 +84,18 @@ public class BCryptTest {
     }
 
     @Test(expectedExceptions = InvalidHashException.class)
-    public static void invalidHash() throws InvalidHashException {
+    public void invalidHash() throws InvalidHashException {
         String hash = "NOTAHASH";
         defaultStrategy.verify(PASSWORD, hash);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void smallWorkFactor() throws InvalidHashException {
+        BCryptStrategy.getInstance(0);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void largeWorkFactor() throws InvalidHashException {
+        BCryptStrategy.getInstance(31);
     }
 }

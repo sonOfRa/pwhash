@@ -16,6 +16,7 @@
 package de.slevermann.pwhash.argon2;
 
 import de.mkammerer.argon2.Argon2Factory;
+import de.slevermann.pwhash.InvalidHashException;
 
 /**
  * A strategy implementation using argon2id for password hashing.
@@ -42,8 +43,28 @@ public class Argon2idStrategy extends Argon2Strategy {
      * @param saltLength  the length of the generated salt
      * @param hashLength  the output length for the hash
      */
-    public Argon2idStrategy(int memoryCost, int parallelism, int timeCost, int saltLength, int hashLength) {
+    private Argon2idStrategy(int memoryCost, int parallelism, int timeCost, int saltLength, int hashLength) {
         super(memoryCost, parallelism, timeCost);
         this.argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, saltLength, hashLength);
     }
+
+    /**
+     * Create a customized argon2id instance
+     * <p>
+     * For all arguments, there are default values present in superclass to be used if not all values need to be customized
+     *
+     * @param memoryCost  the memory cost in kibibytes
+     * @param parallelism the amount of threads to use
+     * @param timeCost    the amount of iterations to use
+     * @param saltLength  the length of the generated salt
+     * @param hashLength  the output length for the hash
+     * @return the customized argon2id instance
+     * @throws InvalidHashException if any of the parameters are invalid
+     */
+    public static Argon2idStrategy getInstance(int memoryCost, int parallelism, int timeCost, int saltLength, int hashLength)
+            throws InvalidHashException {
+        verifyParameters(memoryCost, parallelism, timeCost, saltLength, hashLength);
+        return new Argon2idStrategy(memoryCost, parallelism, timeCost, saltLength, hashLength);
+    }
+
 }

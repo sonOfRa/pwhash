@@ -17,6 +17,7 @@ package de.slevermann.pwhash.argon2;
 
 import de.mkammerer.argon2.Argon2;
 import de.slevermann.pwhash.HashStrategy;
+import de.slevermann.pwhash.InvalidHashException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -117,9 +118,44 @@ public class Argon2Strategy implements HashStrategy {
 
     /**
      * Get a default argon2 instance
+     *
      * @return the default argon2 instance, which is argon2id
      */
     public static Argon2Strategy getDefault() {
         return new Argon2idStrategy();
+    }
+
+
+    /**
+     * Verify the given parameters for use with argon2
+     *
+     * @param memoryCost  the memory cost to verify, must be &gt;= 8*parallelism
+     * @param parallelism the parallelism to verify, must be &gt;= 1
+     * @param timeCost    the time cost to verify, must be &gt;= 1
+     * @param saltLength  the salt length to verify, must be &gt;= 8
+     * @param hashLength  the output length to verify, must be &gt;= 4
+     * @throws InvalidHashException if any of the given parameters are illegal
+     */
+    public static void verifyParameters(int memoryCost, int parallelism, int timeCost, int saltLength, int hashLength)
+            throws InvalidHashException {
+        if (memoryCost < 8 * parallelism) {
+            throw new InvalidHashException("Memory cost must be >= 8*parallelism");
+        }
+
+        if (parallelism < 1) {
+            throw new InvalidHashException("Parallelism must be >= 1");
+        }
+
+        if (timeCost < 1) {
+            throw new InvalidHashException("Time cost must be >= 1");
+        }
+
+        if (saltLength < 8) {
+            throw new InvalidHashException("Salt must be at least 8 bytes long");
+        }
+
+        if (hashLength < 4) {
+            throw new InvalidHashException("Hash must be at least 4 bytes long");
+        }
     }
 }

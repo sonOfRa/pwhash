@@ -1,8 +1,13 @@
 # Changelog
 
 ## [Unreleased]
-### Changed
-- Maven BOM architecture 
+### Removed
+- Public custom constructors for BCrypt and Argon2{i,id,d}
+
+### Added
+- Maven BOM architecture
+- Static ``getInstance`` methods for constructing custom BCrypt and Argon2 instances.
+These throw exceptions when invalid values are provided
 
 ## [2.1.1] 2018-01-31
 ### Added

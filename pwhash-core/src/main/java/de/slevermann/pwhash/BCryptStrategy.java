@@ -42,7 +42,7 @@ public class BCryptStrategy implements HashStrategy {
      *
      * @param workFactor the work factor to use
      */
-    public BCryptStrategy(int workFactor) {
+    private BCryptStrategy(int workFactor) {
         this.workFactor = workFactor;
     }
 
@@ -77,5 +77,20 @@ public class BCryptStrategy implements HashStrategy {
         int extractedWorkFactor = Integer.parseInt(hash.split("\\$")[2]);
 
         return extractedWorkFactor != this.workFactor;
+    }
+
+
+    /**
+     * Get a custom bcrypt instance
+     *
+     * @param workFactor the work factor, must be 1 &lt;= workFactor &lt; 30
+     * @return the customized bcrypt instance
+     * @throws InvalidHashException if the work factor is invalid
+     */
+    public static BCryptStrategy getInstance(int workFactor) throws InvalidHashException {
+        if (workFactor < 1 || workFactor > 30) {
+            throw new InvalidHashException("Work factor must be between 1 and 30");
+        }
+        return new BCryptStrategy(workFactor);
     }
 }

@@ -15,20 +15,53 @@
  */
 package de.slevermann.pwhash.argon2;
 
+import de.slevermann.pwhash.InvalidHashException;
+import org.testng.annotations.Test;
+
 public class Argon2dTest extends Argon2Test {
-    Argon2dTest() {
+    Argon2dTest() throws InvalidHashException {
         this.id = "argon2d";
         this.defaultStrategy = new Argon2dStrategy();
-        this.customStrategy = new Argon2dStrategy(CUSTOM_MEMORY_COST, CUSTOM_PARALLELISM, CUSTOM_TIME_COST,
+        this.customStrategy = Argon2dStrategy.getInstance(CUSTOM_MEMORY_COST, CUSTOM_PARALLELISM, CUSTOM_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
-        this.customMStrategy = new Argon2dStrategy(CUSTOM_MEMORY_COST,
+        this.customMStrategy = Argon2dStrategy.getInstance(CUSTOM_MEMORY_COST,
                 Argon2Strategy.DEFAULT_PARALLELISM, Argon2Strategy.DEFAULT_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
-        this.customPStrategy = new Argon2dStrategy(Argon2Strategy.DEFAULT_MEMORY_COST,
+        this.customPStrategy = Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST,
                 CUSTOM_PARALLELISM, Argon2Strategy.DEFAULT_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
-        this.customTStrategy = new Argon2dStrategy(Argon2Strategy.DEFAULT_MEMORY_COST,
+        this.customTStrategy = Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST,
                 Argon2Strategy.DEFAULT_PARALLELISM, CUSTOM_TIME_COST,
                 Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void badMemoryCost() throws InvalidHashException {
+        Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_PARALLELISM * 4, Argon2Strategy.DEFAULT_PARALLELISM, Argon2Strategy.DEFAULT_TIME_COST,
+                Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void badParallelism() throws InvalidHashException {
+        Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST, 0, Argon2Strategy.DEFAULT_TIME_COST,
+                Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void badTimeCost() throws InvalidHashException {
+        Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST, Argon2Strategy.DEFAULT_PARALLELISM, 0,
+                Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void badSaltLength() throws InvalidHashException {
+        Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST, Argon2Strategy.DEFAULT_PARALLELISM, Argon2Strategy.DEFAULT_TIME_COST,
+                7, Argon2Strategy.DEFAULT_HASH_LENGTH);
+    }
+
+    @Test(expectedExceptions = InvalidHashException.class)
+    public void badHashLength() throws InvalidHashException {
+        Argon2dStrategy.getInstance(Argon2Strategy.DEFAULT_MEMORY_COST, Argon2Strategy.DEFAULT_PARALLELISM, Argon2Strategy.DEFAULT_TIME_COST,
+                Argon2Strategy.DEFAULT_SALT_LENGTH, 3);
     }
 }

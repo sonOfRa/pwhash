@@ -8,6 +8,7 @@ import de.slevermann.pwhash.examples.common.User;
 import de.slevermann.pwhash.examples.common.UserDao;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 /**
  * This class serves as an example for basic usage of the argon2 strategy, and proper use of
@@ -45,8 +46,12 @@ public class Argon2Example {
         jdbi.useExtension(UserDao.class, dao -> dao.createUser(u));
 
         System.out.println("Switching to upgraded argon2 instance");
-        strategy = new Argon2idStrategy(CUSTOM_MEMORY_COST, CUSTOM_PARALLELISM, CUSTOM_TIME_COST,
-                Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+        try {
+            strategy = Argon2idStrategy.getInstance(CUSTOM_MEMORY_COST, CUSTOM_PARALLELISM, CUSTOM_TIME_COST,
+                    Argon2Strategy.DEFAULT_SALT_LENGTH, Argon2Strategy.DEFAULT_HASH_LENGTH);
+        } catch (InvalidHashException e) {
+            throw new RuntimeException(e);
+        }
 
         User fromDB = jdbi.withExtension(UserDao.class, dao -> dao.findUser(userName));
         System.out.println("User fetched from DB: " + fromDB);
