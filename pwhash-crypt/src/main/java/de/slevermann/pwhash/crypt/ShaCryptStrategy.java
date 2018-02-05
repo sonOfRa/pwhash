@@ -245,7 +245,8 @@ public abstract class ShaCryptStrategy implements HashStrategy {
                 // h) finish digest C
                 acResult = c.digest();
             }
-            return acResult;
+            // Shuffle output according to 22. e)
+            return shuffle(acResult);
         } catch (NoSuchAlgorithmException ex) {
             throw new IllegalStateException("Missing implementation for " + algorithm, ex);
         }
@@ -271,7 +272,9 @@ public abstract class ShaCryptStrategy implements HashStrategy {
     }
 
     /**
-     * Shuffle bytes around before encoding according to the crypt rules
+     * Shuffle bytes around before encoding according to the crypt rules.
+     * <p>
+     * The rules are defined in section 22. e) of the "standard"
      *
      * @param data unshuffled data
      * @return shuffled data
