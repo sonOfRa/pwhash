@@ -43,6 +43,7 @@ public abstract class ShaCryptStrategy implements HashStrategy {
     private SecureRandom secureRandom;
     private int saltLength;
     private int blockSize;
+    private int id;
 
     /**
      * Create a new shacrypt instance given rounds and a hash algorithm
@@ -52,18 +53,25 @@ public abstract class ShaCryptStrategy implements HashStrategy {
      *                   automatically corrected as per the specification
      * @param saltLength length of the salt to use.
      * @param blockSize  the size of blocks to use for updating internal chunks. Should be equal to the output size of the used algorithm
+     * @param id         identifier to use in the hash string
      */
-    protected ShaCryptStrategy(String algorithm, int rounds, int saltLength, int blockSize) {
+    protected ShaCryptStrategy(String algorithm, int rounds, int saltLength, int blockSize, int id) {
         this.algorithm = algorithm;
         this.rounds = Math.min(Math.max(rounds, MIN_ROUNDS), MAX_ROUNDS);
         this.saltLength = Math.min(saltLength, MAX_SALT_LENGTH);
         this.secureRandom = new SecureRandom();
         this.blockSize = blockSize;
+        this.id = id;
     }
 
     @Override
     public String hash(String password) {
-        return null;
+        String salt = genSalt();
+        byte[] hash = computeHash(password, salt, rounds);
+
+        String hashString = B64Util.encode(hash);
+
+        return "$" + id + "$rounds=" + rounds + "$" + salt + "$" + hashString;
     }
 
     /**
@@ -74,8 +82,13 @@ public abstract class ShaCryptStrategy implements HashStrategy {
      * @param password the plaintext password to hash
      * @return a hashed password String containing all information necessary to verify it again later
      */
-    public String hashOld(String password) {
-        return null;
+    protected String hashOld(String password) {
+        String salt = genSalt();
+        byte[] hash = computeHash(password, salt, DEFAULT_ROUNDS);
+
+        String hashString = B64Util.encode(hash);
+
+        return "$" + id + "$" + salt + "$" + hashString;
     }
 
     private byte[] computeHash(String password, String salt, int iterations) {
@@ -263,11 +276,59 @@ public abstract class ShaCryptStrategy implements HashStrategy {
 
     @Override
     public boolean verify(String password, String hash) throws InvalidHashException {
-        return false;
+        String[] chunks = hash.split("\\$");
+
+        int chunkCount = chunks.length;
+        if (chunkCount > 5 || chunkCount < 4) {
+            throw new InvalidHashException("ShaCrypt hash must have 4 or 5 chunks");
+        }
+
+        int extractedId = Integer.parseInt(chunks[1]);
+
+        if (extractedId != id) {
+            throw new InvalidHashException("Invalid shacrypt ID");
+        }
+
+        int currentChunk = 2;
+
+        int rounds = DEFAULT_ROUNDS;
+        if (chunkCount == 5) {
+            String[] roundChunks = chunks[currentChunk].split("=");
+            if (!roundChunks[0].equals("rounds")) {
+                throw new InvalidHashException("Invalid option");
+            }
+            rounds = Integer.parseInt(chunks[currentChunk].split("=")[1]);
+            rounds = Math.min(Math.max(rounds, MIN_ROUNDS), MAX_ROUNDS);
+            currentChunk++;
+        }
+
+        String salt = chunks[currentChunk];
+        currentChunk++;
+        String extractedHash = chunks[currentChunk];
+
+        int hashLength = extractedHash.length();
+
+        if ((hashLength * 3) / 4 != blockSize) {
+            throw new InvalidHashException("Invalid hash length");
+        }
+
+        byte[] extractedHashBytes = B64Util.decode(extractedHash);
+
+        byte[] passwordHashBytes = computeHash(password, salt, rounds);
+        return MessageDigest.isEqual(extractedHashBytes, passwordHashBytes);
     }
 
     @Override
     public boolean needsRehash(String password, String hash) {
+        try {
+            if (!verify(password, hash)) {
+                return false;
+            }
+        } catch (InvalidHashException ex) {
+            return false;
+        }
+
+        String[] chunks = hash.split("\\$");
         return false;
     }
 
