@@ -315,7 +315,6 @@ public abstract class ShaCryptStrategy implements HashStrategy {
         byte[] extractedHashBytes = B64Util.decode(extractedHash);
 
         byte[] passwordHashBytes = computeHash(password, salt, rounds);
-        System.out.println(extractedHashBytes.length + " " + passwordHashBytes.length);
         return MessageDigest.isEqual(extractedHashBytes, passwordHashBytes);
     }
 
