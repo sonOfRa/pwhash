@@ -6,37 +6,17 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static de.slevermann.pwhash.crypt.B64Util.B64_LOOKUP;
-
 
 public class B64Test {
 
     private Random random = new Random();
 
     @DataProvider
-    Object[][] invalidByteArrays() {
-        return new Object[][]{
-                {new byte[1]},
-                {new byte[2]},
-                {new byte[4]},
-                {new byte[7]},
-                {new byte[3 * 100 + 1]},
-                {new byte[3 * 100 + 2]},
-        };
-    }
-
-    @DataProvider
     Object[][] invalidLengthStrings() {
         return new Object[][]{
                 {"a"},
-                {"aa"},
-                {"aaa"},
                 {"aaaaa"},
-                {"aaaaaa"},
-                {"aaaaaaa"},
                 {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
-                {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
-                {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
         };
     }
 
@@ -62,9 +42,39 @@ public class B64Test {
         Assert.assertEquals(encoded.length(), 0, "Encoded string for empty byte array should be empty");
     }
 
-    @Test(dataProvider = "invalidByteArrays", expectedExceptions = IllegalArgumentException.class)
-    public void testEncodeInvalidLength(byte[] data) {
-        B64Util.encode(data);
+
+    @Test(invocationCount = 100)
+    public void testEncodeRemainderOne() {
+        int inputLength;
+        do {
+            inputLength = random.nextInt(100);
+        } while (inputLength % 3 != 1);
+
+        byte[] data = new byte[inputLength];
+        random.nextBytes(data);
+
+        String output = B64Util.encode(data);
+
+        int expectedLength = ((inputLength - 1) / 3) * 4 + 2;
+
+        Assert.assertEquals(output.length(), expectedLength, "Single trailing byte should produce 2 trailing characters");
+    }
+
+    @Test(invocationCount = 100)
+    public void testEncodeRemainderTwo() {
+        int inputLength;
+        do {
+            inputLength = random.nextInt(100);
+        } while (inputLength % 3 != 2);
+
+        byte[] data = new byte[inputLength];
+        random.nextBytes(data);
+
+        String output = B64Util.encode(data);
+
+        int expectedLength = ((inputLength - 2) / 3) * 4 + 3;
+
+        Assert.assertEquals(output.length(), expectedLength, "Single trailing byte should produce 3 trailing characters");
     }
 
     @Test
@@ -91,6 +101,48 @@ public class B64Test {
 
         byte[] dotsDecoded = B64Util.decode(dots);
         Assert.assertEquals(dotsDecoded, new byte[3 * 5], "Dots should decode to just zeros");
+    }
+
+    @Test(invocationCount = 100)
+    public void testDecodeRemainderTwo() {
+        int inputLength;
+        do {
+            inputLength = random.nextInt(100);
+        } while (inputLength % 4 != 2);
+
+        StringBuilder sb = new StringBuilder(inputLength);
+        for (int i = 0; i < inputLength; i++) {
+            int index = random.nextInt(B64Util.B64_LOOKUP.length());
+            sb.append(B64Util.B64_LOOKUP.charAt(index));
+        }
+
+        String data = sb.toString();
+        byte[] decoded = B64Util.decode(data);
+
+        int expectedLength = ((inputLength - 2) / 4) * 3 + 1;
+
+        Assert.assertEquals(decoded.length, expectedLength, "Decoding 2 trailing characters should yield one trailing byte");
+    }
+
+    @Test(invocationCount = 100)
+    public void testDecodeRemainderThree() {
+        int inputLength;
+        do {
+            inputLength = random.nextInt(100);
+        } while (inputLength % 4 != 3);
+
+        StringBuilder sb = new StringBuilder(inputLength);
+        for (int i = 0; i < inputLength; i++) {
+            int index = random.nextInt(B64Util.B64_LOOKUP.length());
+            sb.append(B64Util.B64_LOOKUP.charAt(index));
+        }
+
+        String data = sb.toString();
+        byte[] decoded = B64Util.decode(data);
+
+        int expectedLength = ((inputLength - 2) / 4) * 3 + 2;
+
+        Assert.assertEquals(decoded.length, expectedLength, "Decoding 3 trailing characters should yield two trailing bytes");
     }
 
     @Test(dataProvider = "invalidLengthStrings", expectedExceptions = IllegalArgumentException.class)

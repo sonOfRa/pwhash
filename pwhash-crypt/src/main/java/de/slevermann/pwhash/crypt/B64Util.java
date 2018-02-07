@@ -42,16 +42,30 @@ public class B64Util {
      * @return the encoded String
      */
     public static String encode(byte[] data) {
-        if (data.length % 3 != 0) {
-            throw new IllegalArgumentException("Input length not divisible by 3");
-        }
-        StringBuilder output = new StringBuilder((data.length / 3) * 4);
-        for (int i = 0; i < data.length; i += 3) {
+        int remainder = data.length % 3;
+
+        StringBuilder output = new StringBuilder(86);
+        for (int i = 0; i < data.length - remainder; i += 3) {
             int b0 = data[i] & 0xff;
             int b1 = data[i + 1] & 0xff;
             int b2 = data[i + 2] & 0xff;
             int w = (b2 << 16) | (b1 << 8) | b0;
             for (int j = 0; j < 4; j++) {
+                output.append(B64_LOOKUP.charAt(w & 0b111111));
+                w >>>= 6;
+            }
+        }
+        if (remainder != 0) {
+            int b1, b0;
+            if (remainder == 2) {
+                b1 = data[data.length - 1];
+                b0 = data[data.length - 2];
+            } else {
+                b1 = 0;
+                b0 = data[data.length - 1];
+            }
+            int w = (b1 << 8) | b0;
+            for (int i = 0; i < remainder + 1; i++) {
                 output.append(B64_LOOKUP.charAt(w & 0b111111));
                 w >>>= 6;
             }
@@ -66,17 +80,24 @@ public class B64Util {
      * @return the decoded String
      */
     public static byte[] decode(String data) {
-        if (data.length() % 4 != 0) {
-            throw new IllegalArgumentException("Input length not divisible by 4");
+        int remainder = data.length() % 4;
+        if (remainder == 1) {
+            throw new IllegalArgumentException("Input length can't be evenly decoded into bytes");
         }
 
         if (!B64_PATTERN.matcher(data).matches()) {
             throw new IllegalArgumentException("Input is not valid B64");
         }
 
-        byte[] res = new byte[data.length() / 4 * 3];
+        int size = ((data.length() - remainder) / 4) * 3;
+
+        if (remainder != 0) {
+            size += remainder - 1;
+        }
+
+        byte[] res = new byte[size];
         int offset = 0;
-        for (int i = 0; i < data.length(); i += 4) {
+        for (int i = 0; i < data.length() - remainder; i += 4) {
             int b0 = B64_REVERSE[data.charAt(i) - B64_REVERSE_OFFSET];
             int b1 = B64_REVERSE[data.charAt(i + 1) - B64_REVERSE_OFFSET];
             int b2 = B64_REVERSE[data.charAt(i + 2) - B64_REVERSE_OFFSET];
@@ -86,6 +107,22 @@ public class B64Util {
             res[offset++] = (byte) val;
             res[offset++] = (byte) (val >>> 8);
             res[offset++] = (byte) (val >>> 16);
+        }
+
+        if (remainder == 2) {
+            int b0 = B64_REVERSE[data.charAt(data.length() - 2) - B64_REVERSE_OFFSET];
+            int b1 = B64_REVERSE[data.charAt(data.length() - 1) - B64_REVERSE_OFFSET];
+
+            int val = (b1 << 6) | b0;
+            res[offset] = (byte) val;
+        } else if (remainder == 3) {
+            int b0 = B64_REVERSE[data.charAt(data.length() - 3) - B64_REVERSE_OFFSET];
+            int b1 = B64_REVERSE[data.charAt(data.length() - 2) - B64_REVERSE_OFFSET];
+            int b2 = B64_REVERSE[data.charAt(data.length() - 1) - B64_REVERSE_OFFSET];
+
+            int val = (b2 << 12) | (b1 << 6) | b0;
+            res[offset++] = (byte) val;
+            res[offset] = (byte) (val >>> 8);
         }
         return res;
     }
