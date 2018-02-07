@@ -29,12 +29,12 @@ public class Sha512CryptStrategy extends ShaCryptStrategy {
      * @param saltLength length of the salt to use. Salts are truncated to 16 bytes
      */
     public Sha512CryptStrategy(int rounds, int saltLength) {
-        super("SHA512", rounds, saltLength, 64, 6);
+        super("SHA-512", rounds, saltLength, 64, 6);
     }
 
     @Override
     protected byte[] shuffle(byte[] data) {
-        byte[] output = new byte[66];
+        byte[] output = new byte[data.length];
         output[2] = data[0];
         output[1] = data[21];
         output[0] = data[42];
@@ -119,8 +119,6 @@ public class Sha512CryptStrategy extends ShaCryptStrategy {
         output[61] = data[20];
         output[60] = data[41];
 
-        output[65] = 0;
-        output[64] = 0;
         output[63] = data[63];
 
         return output;

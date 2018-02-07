@@ -93,7 +93,7 @@ public abstract class ShaCryptStrategy implements HashStrategy {
 
     private byte[] computeHash(String password, String salt, int iterations) {
         byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+        byte[] saltBytes = Arrays.copyOf(salt.getBytes(StandardCharsets.UTF_8), 16);
         try {
             // 1.  start digest A
             MessageDigest a = MessageDigest.getInstance(algorithm);
@@ -315,6 +315,7 @@ public abstract class ShaCryptStrategy implements HashStrategy {
         byte[] extractedHashBytes = B64Util.decode(extractedHash);
 
         byte[] passwordHashBytes = computeHash(password, salt, rounds);
+        System.out.println(extractedHashBytes.length + " " + passwordHashBytes.length);
         return MessageDigest.isEqual(extractedHashBytes, passwordHashBytes);
     }
 
@@ -329,7 +330,23 @@ public abstract class ShaCryptStrategy implements HashStrategy {
         }
 
         String[] chunks = hash.split("\\$");
-        return false;
+
+        int currentChunk = 2;
+        int extractedRounds = DEFAULT_ROUNDS;
+        if (chunks.length == 5) {
+            extractedRounds = Integer.parseInt(chunks[currentChunk].split("=")[1]);
+            currentChunk++;
+        }
+
+        if (extractedRounds != rounds) {
+            return true;
+        }
+
+        String salt = chunks[currentChunk];
+
+        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+
+        return saltBytes.length == saltLength;
     }
 
     /**
