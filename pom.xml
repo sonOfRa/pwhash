@@ -284,6 +284,11 @@
                 <artifactId>jbcrypt</artifactId>
                 <version>0.4</version>
             </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.11</version>
+            </dependency>
 
             <!-- Other dependencies -->
             <dependency>
