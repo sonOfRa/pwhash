@@ -73,6 +73,7 @@ public abstract class CryptStrategy implements HashStrategy {
      *
      * @param hash the hash to extract the salt from
      * @return the full salt containg id, rounds, and the salt itself
+     * @throws InvalidHashException if the hash is incorrectly formatted
      */
     protected String extractSalt(String hash) throws InvalidHashException {
         try {
@@ -88,6 +89,7 @@ public abstract class CryptStrategy implements HashStrategy {
      *
      * @param hash the hash string to extract from
      * @return the hash data
+     * @throws InvalidHashException if the hash is incorrectly formatted
      */
     protected String extractHash(String hash) throws InvalidHashException {
         try {
