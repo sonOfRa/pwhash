@@ -75,7 +75,7 @@ public abstract class CryptStrategy implements HashStrategy {
      * @return the full salt containg id, rounds, and the salt itself
      * @throws InvalidHashException if the hash is incorrectly formatted
      */
-    protected String extractSalt(String hash) throws InvalidHashException {
+    private String extractSalt(String hash) throws InvalidHashException {
         try {
             int lastDollar = hash.lastIndexOf('$');
             return hash.substring(0, lastDollar);
@@ -91,7 +91,7 @@ public abstract class CryptStrategy implements HashStrategy {
      * @return the hash data
      * @throws InvalidHashException if the hash is incorrectly formatted
      */
-    protected String extractHash(String hash) throws InvalidHashException {
+    private String extractHash(String hash) throws InvalidHashException {
         try {
             return hash.substring(hash.lastIndexOf('$') + 1);
         } catch (IndexOutOfBoundsException ex) {

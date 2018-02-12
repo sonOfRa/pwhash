@@ -19,8 +19,28 @@ public class Sha512CryptTest extends ShaCryptTest {
         };
     }
 
+    @DataProvider
+    @Override
+    protected Object[][] invalidSaltCharacters() {
+        return new Object[][]{
+                {"6$ÄÖÜ$EYhOi7nUch5vm.Hh116Cv9TzWX5sdVjJjh1END/z/2kkT5BWiRUPtJgS/OJJ4.c1aFuw04VcmVst7tGmQd79r0"},
+        };
+    }
+
+    @DataProvider
+    @Override
+    protected Object[][] invalidSaltOptions() {
+        return new Object[][]{
+                {"$6$invalid=1000$MJf9/UWX$GRKqx.7lZqS9P7995jmt.pqcjP.Zv/VA/Xadn.LlXpgoME1rvsNS3J0Pi4l9Sa4v23qV8DDD.xjYqBsEyhfi9."},
+        };
+    }
+
     public Sha512CryptTest() {
-        this.s = new Sha512CryptStrategy();
+        this.defaultStrategy = new Sha512CryptStrategy();
+        this.customRoundsStrategy = new Sha512CryptStrategy(ShaCryptStrategy.DEFAULT_ROUNDS * 2,
+                CryptStrategy.DEFAULT_SALT_LENGTH);
+        this.customSaltStrategy = new Sha512CryptStrategy(ShaCryptStrategy.DEFAULT_ROUNDS,
+                CryptStrategy.DEFAULT_SALT_LENGTH / 2);
     }
 
 }

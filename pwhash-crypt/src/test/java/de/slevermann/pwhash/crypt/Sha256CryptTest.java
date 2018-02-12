@@ -7,7 +7,7 @@ public class Sha256CryptTest extends ShaCryptTest {
     @DataProvider
     @Override
     public Object[][] externalHashes() {
-        return new Object[][] {
+        return new Object[][]{
                 {"asdf", "$5$s5PL1I/19hr0cSVO$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
                 {"asdf", "$5$rounds=1000$.A1KNh3MI5Oy$IM0v9lDahQJTGSekckzi/gmgl6XI.lK7mU8g5xmcxVD"},
                 {"asdf", "$5$rounds=5000$cTudmPLG$4qbzYy/v6CibqmdhneV4f8jYYiMTt9snTMND29xBywA"},
@@ -19,7 +19,27 @@ public class Sha256CryptTest extends ShaCryptTest {
         };
     }
 
+    @DataProvider
+    @Override
+    protected Object[][] invalidSaltCharacters() {
+        return new Object[][]{
+                {"$5$ÄÖÜ$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
+        };
+    }
+
+    @DataProvider
+    @Override
+    protected Object[][] invalidSaltOptions() {
+        return new Object[][]{
+                {"$5$invalid=1000$.A1KNh3MI5Oy$IM0v9lDahQJTGSekckzi/gmgl6XI.lK7mU8g5xmcxVD"},
+        };
+    }
+
     public Sha256CryptTest() {
-        this.s = new Sha256CryptStrategy();
+        this.defaultStrategy = new Sha256CryptStrategy();
+        this.customRoundsStrategy = new Sha256CryptStrategy(ShaCryptStrategy.DEFAULT_ROUNDS * 2,
+                CryptStrategy.DEFAULT_SALT_LENGTH);
+        this.customSaltStrategy = new Sha256CryptStrategy(ShaCryptStrategy.DEFAULT_ROUNDS,
+                CryptStrategy.DEFAULT_SALT_LENGTH / 2);
     }
 }
