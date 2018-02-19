@@ -31,8 +31,8 @@ public class Sha512CryptTest extends ShaCryptTest {
     @Override
     protected Object[][] badSaltId() {
         return new Object[][]{
-                {"$5$ÄÖÜ$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
-                {"6$ÄÖÜ$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
+                {"$5$IJHFIZSm6my2mQM7$3zNDqWwod9t.wV9icqXQxPHHayJqOXdBp1LoJmh3M8q0jUC0gBDSufX7zsq/lrK.2l/GnWhxZswq5cuv2By0s."},
+                {"6$IJHFIZSm6my2mQM7$3zNDqWwod9t.wV9icqXQxPHHayJqOXdBp1LoJmh3M8q0jUC0gBDSufX7zsq/lrK.2l/GnWhxZswq5cuv2By0s."},
         };
     }
 

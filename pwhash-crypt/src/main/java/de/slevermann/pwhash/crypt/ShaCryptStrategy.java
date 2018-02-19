@@ -11,7 +11,6 @@ public abstract class ShaCryptStrategy extends CryptStrategy {
     public static final int DEFAULT_ROUNDS = 5000;
     protected int rounds;
     protected boolean outputRounds;
-    protected final String id;
 
     /**
      * Create a default shacrypt strategy with the given ID
@@ -21,10 +20,9 @@ public abstract class ShaCryptStrategy extends CryptStrategy {
      * @param id the ID to use
      */
     protected ShaCryptStrategy(String id) {
-        super(DEFAULT_SALT_LENGTH);
+        super(DEFAULT_SALT_LENGTH, id);
         this.rounds = DEFAULT_ROUNDS;
         this.outputRounds = false;
-        this.id = id;
     }
 
     /**
@@ -35,10 +33,9 @@ public abstract class ShaCryptStrategy extends CryptStrategy {
      * @param saltLength length of the salt
      */
     protected ShaCryptStrategy(String id, int rounds, int saltLength) {
-        super(saltLength);
+        super(saltLength, id);
         this.rounds = rounds;
         this.outputRounds = true;
-        this.id = id;
     }
 
     @Override

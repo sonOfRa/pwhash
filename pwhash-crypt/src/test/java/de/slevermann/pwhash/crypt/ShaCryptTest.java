@@ -47,18 +47,13 @@ public abstract class ShaCryptTest {
                 "Invalid password should fail to verify");
     }
 
-    @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Invalid salt format")
-    public void verifyInvalidSaltId() throws InvalidHashException {
-        defaultStrategy.verify(PASSWORD, "$invalid$");
-    }
-
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Invalid salt format",
             dataProvider = "invalidSaltCharacters")
     public void verifyInvalidSaltCharacters(String invalidSaltCharacters) throws InvalidHashException {
         defaultStrategy.verify(PASSWORD, invalidSaltCharacters);
     }
 
-    @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Invalid salt format",
+    @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Invalid salt identifier",
             dataProvider = "badSaltId")
     public void verifyBadSaltId(String badSaltId) throws InvalidHashException {
         defaultStrategy.verify(PASSWORD, badSaltId);

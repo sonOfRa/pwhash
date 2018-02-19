@@ -31,8 +31,8 @@ public class Sha256CryptTest extends ShaCryptTest {
     @Override
     protected Object[][] badSaltId() {
         return new Object[][]{
-                {"$6$ÄÖÜ$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
-                {"5$ÄÖÜ$SjeqzE0tdlN9SiVkXrhbdUbAsnL0GQKe8jZZSdmWNT5"},
+                {"$6$TXclidmEjfAd$edL7CmbYg8Ed5QAxKjmus7tZUsNmYRB3..A8XKMrJk3"},
+                {"5$TXclidmEjfAd$edL7CmbYg8Ed5QAxKjmus7tZUsNmYRB3..A8XKMrJk3"},
         };
     }
 

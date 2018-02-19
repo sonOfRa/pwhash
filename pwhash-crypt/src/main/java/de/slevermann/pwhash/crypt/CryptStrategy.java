@@ -16,11 +16,13 @@ public abstract class CryptStrategy implements HashStrategy {
     public static final int DEFAULT_SALT_LENGTH = 16;
     public static final String B64_ALPHABET = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     protected int saltLength;
+    protected final String id;
 
     private final SecureRandom secureRandom = new SecureRandom();
 
-    protected CryptStrategy(int saltLength) {
+    protected CryptStrategy(int saltLength, String id) {
         this.saltLength = saltLength;
+        this.id = id;
     }
 
     @Override
@@ -31,6 +33,9 @@ public abstract class CryptStrategy implements HashStrategy {
     @Override
     public boolean verify(String password, String hash) throws InvalidHashException {
         String salt = extractSalt(hash);
+        if (!salt.startsWith("$" + id)) {
+            throw new InvalidHashException("Invalid salt identifier");
+        }
         String computedHash;
         try {
             computedHash = computeHash(password, salt);
