@@ -49,15 +49,17 @@ Currently, the library supports the flavors using SHA512, SHA256 and SHA1.
 ## Maven dependency
 ### Release version
 The root ``pom.xml`` of this project functions as a [BOM](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html).
-In order to use it, add this to your ``pom.xml``
+In order to use it, add this to your ``<dependencyManagement>`` section in your ``pom.xml``
 ```xml
-<dependency>
-    <groupId>de.slevermann</groupId>
-    <artifactId>pwhash</artifactId>
-    <version>3.0.0</version>
-    <scope>import</scope>
-    <type>pom</type>
-</dependency>
+<dependencyManagement>
+    <dependency>
+        <groupId>de.slevermann</groupId>
+        <artifactId>pwhash</artifactId>
+        <version>3.0.0</version>
+        <scope>import</scope>
+        <type>pom</type>
+    </dependency>
+</dependencyManagement>
 ```
 
 After this, you can define your dependencies without specifying versions, as they are handled by the BOM.
