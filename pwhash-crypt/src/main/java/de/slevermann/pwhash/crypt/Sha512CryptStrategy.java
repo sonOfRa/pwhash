@@ -28,7 +28,7 @@ public class Sha512CryptStrategy extends ShaCryptStrategy {
      * Encodes the rounds parameter into the output
      *
      * @param rounds     the amount of rounds between 1000 and 999,999,999. Smaller larger values are adjusted.
-     * @param saltLength lenght of the salt to use. Lengths longer than 16 result in only the first 16 bytes being used
+     * @param saltLength length of the salt to use. Lengths longer than 16 result in only the first 16 bytes being used
      */
     public Sha512CryptStrategy(int rounds, int saltLength) {
         super(ID, rounds, saltLength);

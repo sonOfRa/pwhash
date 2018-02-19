@@ -17,7 +17,7 @@ public abstract class ShaCryptTest {
 
     protected abstract Object[][] invalidSaltCharacters();
 
-    protected abstract Object[][] invalidSaltOptions();
+    protected abstract Object[][] badSaltId();
 
     @Test(dataProvider = "externalHashes")
     public void verifyExternal(String password, String hash) throws InvalidHashException {
@@ -59,10 +59,8 @@ public abstract class ShaCryptTest {
     }
 
     @Test(expectedExceptions = InvalidHashException.class, expectedExceptionsMessageRegExp = "Invalid salt format",
-            dataProvider = "invalidSaltOptions")
-    @Ignore(value = "Ignored due to a bug in Apache Codec 1.11")
-    public void verifyInvalidSaltOptions(String invalidSaltOptions) throws InvalidHashException {
-        defaultStrategy.verify(PASSWORD, invalidSaltOptions);
+            dataProvider = "badSaltId")
+    public void verifyBadSaltId(String badSaltId) throws InvalidHashException {
+        defaultStrategy.verify(PASSWORD, badSaltId);
     }
-
 }
