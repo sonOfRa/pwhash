@@ -61,7 +61,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <argon2.version>2.3</argon2.version>
+        <argon2.version>2.4</argon2.version>
     </properties>
 
     <reporting>
@@ -282,7 +282,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>6.13.1</version>
+                <version>6.14.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
