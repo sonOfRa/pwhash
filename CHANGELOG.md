@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [3.0.1] 2019-01-02
+### Changed
+- Updated dependency versions
+
 ## [3.0.0] 2018-02-04
 ### Removed
 - Public custom constructors for BCrypt and Argon2{i,id,d}

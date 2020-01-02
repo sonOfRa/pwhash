@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.slevermann</groupId>
     <artifactId>pwhash</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>pwhash-parent</name>
 
@@ -61,7 +61,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <argon2.version>2.4</argon2.version>
+        <argon2.version>2.6</argon2.version>
+        <testng.version>7.1.0</testng.version>
     </properties>
 
     <reporting>
@@ -136,7 +137,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.0</version>
+                    <version>0.8.5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -282,7 +283,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>6.14.2</version>
+                <version>${testng.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
