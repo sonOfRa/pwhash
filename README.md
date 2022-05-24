@@ -4,6 +4,9 @@
 [![SonarCloud Bugs](https://sonarcloud.io/api/badges/measure?key=de.slevermann:pwhash&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=de.slevermann:pwhash)
 [![SonarCloud Vulnerabilities](https://sonarcloud.io/api/badges/measure?key=de.slevermann:pwhash&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=de.slevermann:pwhash)
 
+# UNMAINTAINED
+I am no longer actively maintaining this project. As far as I know, it never gained any users and is generally of limited usefulness because most web frameworks bring their own hashing mechanisms these days.
+
 # pwhash
 
 Pwhash is a library inspired by ``password_hash()`` family of function in the PHP standard library. It is meant to offer
